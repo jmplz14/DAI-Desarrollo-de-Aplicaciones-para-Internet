@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block main %}
+    <form action="/registrado" method = "POST">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Usuario</label>
+            <input  class="form-control" name = "nombre" id="exampleFormControlInput1" placeholder="Usuario">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Contraseña</label>
+            <input class="form-control" name = "contraseña" id="exampleFormControlInput1" placeholder="Contraseña" type = "password">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nombre completo</label>
+            <input  class="form-control" name = "nombreCompleto" id="exampleFormControlInput1" placeholder="Nombre completo">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn">Registrar</button>
+    </form>
+    {% if cambiado is defined %}
+        {% if not cambiado%}
+            <p class="text-danger">No se puedo registrar correctamente</p>
+        {%endif%}
+    {%endif%}
+{% endblock %}

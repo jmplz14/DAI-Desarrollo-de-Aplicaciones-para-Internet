@@ -1,0 +1,103 @@
+{% load static %}
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            
+        <img src="{% static "johnny_automatic_vegetables.svg" %}" height="100" alt="">
+        <div class="mr-auto">
+            <h1 class="text-warning">Fruteria Tomate</h1>
+            <p class="text-warning">Tu frutería de barrio y confianza</p>
+        </div>
+        <div>
+            {% if usuario is not defined %}
+            <form action = "/login" method = "POST">
+                <input id="emailInput" placeholder="Usuario" name="usuario" class="form-control form-control-sm" type="text" required="">
+                <input id="passwordInput" placeholder="Password" name="contraseña" class="form-control form-control-sm" type="password" required="">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <form action = "/registro" method = "POST">
+                <button type="submit" class="btn btn-primary btn-block">Registro</button>
+            </form>
+            {%else%}
+            
+            <h3 class="text-warning">Bienvenido {{usuario}}</h3>
+            <form action = "/logout" method = "POST">
+            <button type="submit" class="btn btn-primary btn-block">Logout</button>
+            </form>
+            {%endif%}
+        </div>
+
+    </nav>
+
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{% url 'album_new' %}" class="nav-link"><span class="glyphicon glyphicon-plus">Nuevo album</span></a>   
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'grupo_new' %}" class="nav-link"><span class="glyphicon glyphicon-plus">Nuevo grupo</span></a>   
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'musico_new' %}" class="nav-link"><span class="glyphicon glyphicon-plus">Nuevo músico</span></a>   
+                    </li>
+                    
+
+
+                    {% if usuario is defined %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mongo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            Actores Con Tu Nombre
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                            <p class="nav-link">
+                            Historial:
+                            </p>
+                            {% for item in arrayHistorial %}
+                                <p class="nav-item">{{ item }}</p>
+                            {% endfor %}
+                    </li>
+                    {%endif%}
+                </ul>
+
+
+                
+                
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            
+            {% block main %} {% endblock %}
+            
+
+
+        </main>
+    </div>
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
+            <small>Copyright &copy; Frutería tomate</small>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

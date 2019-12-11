@@ -6,6 +6,9 @@ class Grupo(models.Model):
     fechaCreacion = models.DateField()
     estilo = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.nombre
+
 class Album(models.Model):
     titulo = models.CharField(max_length=200)
     distribuidora = models.CharField(max_length=200)
@@ -18,3 +21,5 @@ class Musico(models.Model):
     fechaNacimiento = models.DateField()
     instrumentoPrincipal = models.CharField(max_length=200)
     grupo = models.ManyToManyField(Grupo)
+    edad = models.IntegerField()
+

@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+
+{% block main %}
+<table class="table">
+    <thead>
+        <tr>
+        <th>Titulo</th>
+        <th>Distribuidora</th>
+        <th>Fecha Lanzamiento</th>
+        <th>Grupo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for al in album %}
+            <tr>
+                <td>{{ al.titulo }}</td>
+                <td>{{al.distribuidora}}</td>      
+                <td>{{al.fechaLanzamiento}}</td>
+                <td>{{al.grupo}}</td>
+                <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <form method="POST">
+                        <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'album_edit' pk=al.pk %}';" >Editar</button>
+                    </form>
+
+                    <form method="POST" action="">
+                        <button type="button" class="btn btn-danger btn-md center-block" onclick="location.href='{% url 'album_borrar' pk=al.pk %}';" >Borrar</button>
+                    </form>
+                </div>
+                </td>
+                        
+            </tr>
+            
+
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

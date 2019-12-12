@@ -1,4 +1,4 @@
-# Fruteria/views.py
+# Discografica/views.py
 
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from .forms import AlbumForm, MusicoForm, GrupoForm

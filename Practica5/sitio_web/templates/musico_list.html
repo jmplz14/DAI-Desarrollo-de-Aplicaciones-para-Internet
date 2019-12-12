@@ -34,4 +34,10 @@
         {% endfor %}
     </tbody>
 </table>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <form method="POST">
+        <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_new' %}'" >Crear Musico</button>
+    </form>
+
+</div>   
 {% endblock %}

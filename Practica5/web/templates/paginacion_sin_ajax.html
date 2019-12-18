@@ -21,7 +21,7 @@
                         {{ tag.nombre }}.
                     {% endfor %}</td>
                 <td>{{dato.edad}}</td>
-                <td>
+                <!---<td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <form method="POST">
                             <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_edit' pk=dato.pk %}';" >Editar</button>
@@ -33,17 +33,19 @@
                     </div>   
                 </td>
                 
-            </tr>
+            </tr>--->
         {% endfor %}
     </tbody>
 </table>
-
+<table id="paginador">
+<table>
+<!--
 <div class="btn-group" role="group" aria-label="Basic example">
     <form method="POST">
         <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_new' %}'" >Crear Musico</button>
     </form>
 
-</div>   
+</div>   --->
 
 
 {% endblock %}

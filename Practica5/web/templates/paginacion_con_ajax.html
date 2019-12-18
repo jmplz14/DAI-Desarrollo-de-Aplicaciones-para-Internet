@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block main %}
-<table id="tablaPaginada" class="table">
+<table id="tablaPaginadaAjax" class="table">
     {{ datos.as_table }}
     <thead>
         
@@ -10,18 +10,16 @@
             {% endfor %}
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tbody">
         {% for dato in datos %}
             <tr>
                 
                 <td>{{dato.nombre}}</td>
                 <td>{{dato.fechaNacimiento}}</td>
                 <td>{{dato.instrumentoPrincipal}}</td>
-                <td>{% for tag in dato.grupo.all %}
-                        {{ tag.nombre }}.
-                    {% endfor %}</td>
+                <td>{{dato.grupo.nombre}}</td>
                 <td>{{dato.edad}}</td>
-                <td>
+                <!---<td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <form method="POST">
                             <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_edit' pk=dato.pk %}';" >Editar</button>
@@ -33,17 +31,21 @@
                     </div>   
                 </td>
                 
-            </tr>
+            </tr>--->
         {% endfor %}
     </tbody>
 </table>
+<table id="paginadorAjax">
 
+    
+<table>
+<!--
 <div class="btn-group" role="group" aria-label="Basic example">
     <form method="POST">
         <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_new' %}'" >Crear Musico</button>
     </form>
 
-</div>   
+</div>   --->
 
 
 {% endblock %}

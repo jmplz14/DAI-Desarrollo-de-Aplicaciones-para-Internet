@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% load crispy_forms_tags%}
+{% block main %}
+    <h2>Nuevo {% autoescape off %}{{ nombre }}{% endautoescape %} </h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="save btn btn-default">Guardar</button>
+    </form>
+{% endblock %}

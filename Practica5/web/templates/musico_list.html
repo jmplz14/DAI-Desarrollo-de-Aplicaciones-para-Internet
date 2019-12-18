@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% block main %}
+<table id="tablaPaginada" class="table">
+    {{ datos.as_table }}
+    <thead>
+        
+        <tr>
+            {% for nombre in cabecera %}
+            <th>{{nombre}}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for dato in datos %}
+            <tr>
+                
+                <td>{{dato.nombre}}</td>
+                <td>{{dato.fechaNacimiento}}</td>
+                <td>{{dato.instrumentoPrincipal}}</td>
+                <td>{{dato.grupo}}</td>
+                <td>{{dato.edad}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <form method="POST">
+                            <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_edit' pk=dato.pk %}';" >Editar</button>
+                        </form>
+
+                        <form method="POST" action="">
+                            <button type="button" class="btn btn-danger btn-md center-block" onclick="location.href='{% url 'musico_borrar' pk=dato.pk %}';" >Borrar</button>
+                        </form>
+                    </div>   
+                </td>
+                
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<table id="paginador">
+<table>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <form method="POST">
+        <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'musico_new' %}'" >Crear Musico</button>
+    </form>
+
+</div>   
+
+
+{% endblock %}

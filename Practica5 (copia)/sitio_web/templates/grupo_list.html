@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+{% block main %}
+<table class="table">
+    <thead>
+        <tr>
+        <th>Nombre</th>
+        <th>Fecha Creación</th>
+        <th>Estilo</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for gr in grupo %}
+            <tr>
+                <td>{{gr.nombre}}</td>      
+                <td>{{gr.fechaCreacion}}</td>
+                <td>{{gr.estilo}}</td>
+                <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <form method="POST">
+                        <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'grupo_edit' pk=gr.pk %}';" >Editar</button>
+                    </form>
+
+                    <form method="POST" action="">
+                            <button type="button" class="btn btn-danger btn-md center-block" onclick="location.href='{% url 'grupo_borrar' pk=gr.pk %}';" >Borrar</button>
+                    </form>
+                </div>
+                </td>
+                        
+            </tr>
+            
+
+        {% endfor %}
+    </tbody>
+</table>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <form method="POST">
+        <button type="button" class="btn btn-primary btn-md center-block" onclick="location.href='{% url 'grupo_new' %}'" >Crear Grupo</button>
+    </form>
+
+</div>  
+{% endblock %}

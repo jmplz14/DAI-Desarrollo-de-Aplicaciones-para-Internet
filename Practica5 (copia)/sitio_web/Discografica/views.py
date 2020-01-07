@@ -5,15 +5,10 @@ from .forms import AlbumForm, MusicoForm, GrupoForm
 from .models import Album, Grupo, Musico
 from django.utils import timezone
 from django.shortcuts import redirect
-from django.forms.models import model_to_dict
-from django.http import JsonResponse
-from django.core import serializers
 
 
 # Create your views here.
 
-
-    
 def index(request):
     return render(request,'index.html', {})
 
@@ -30,10 +25,7 @@ def album_edit(request, pk):
             return redirect('album_list')
     else:
         form = AlbumForm(instance=album)
-    nombre = form.Meta.model.__name__
-    return render(request, 'edit.html', {'form': form, 'nombre': nombre})
-
-
+    return render(request, 'album_edit.html', {'form': form})
 
 def album_borrar(request, pk):
     album = get_object_or_404(Album, pk=pk)
@@ -50,9 +42,7 @@ def album_new(request):
             return redirect('album_list')
     else:
         form = AlbumForm()
-    nombre = form.Meta.model.__name__
-    return render(request, 'edit.html', {'form': form, 'nombre': nombre})
-
+    return render(request, 'album_edit.html', {'form': form})
 
 def album_detail(request, pk):
     post = get_object_or_404(Album, pk=pk)
@@ -66,12 +56,7 @@ def musico_new(request):
             return redirect('musico_list')
     else:
         form = MusicoForm()
-
-    nombre = form.Meta.model.__name__
-    return render(request, 'edit.html', {'form': form, 'nombre': nombre})
-
-
-
+    return render(request, 'musico_edit.html', {'form': form})
 
 def musico_edit(request, pk):
     musico = get_object_or_404(Musico, pk=pk)
@@ -82,15 +67,11 @@ def musico_edit(request, pk):
             return redirect('musico_list')
     else:
         form = MusicoForm(instance=musico)
-
-    nombre = form.Meta.model.__name__
-    return render(request, 'edit.html', {'form': form, 'nombre': nombre})
+    return render(request, 'musico_edit.html', {'form': form})
 
 def musico_list(request):
-    datos = Musico.objects.all()
-    
-    cabecera = MusicoForm.Meta.fields
-    return render(request, 'musico_list.html', {'datos': datos, 'cabecera': cabecera})
+    musico = Musico.objects.all()
+    return render(request, 'musico_list.html', {'musico': musico})
 
 def musico_detail(request, pk):
     post = get_object_or_404(Musico, pk=pk)
@@ -110,10 +91,7 @@ def grupo_new(request):
             return redirect('grupo_list')
     else:
         form = GrupoForm()
-
-    nombre = form.Meta.model.__name__
-    return render(request, 'edit.html', {'form': form, 'nombre': nombre})
-
+    return render(request, 'grupo_edit.html', {'form': form})
 
 
 def grupo_detail(request, pk):
@@ -134,62 +112,9 @@ def grupo_edit(request, pk):
             return redirect('grupo_list')
     else:
         form = GrupoForm(instance=grupo)
-    nombre = form.Meta.model.__name__
-    return render(request, 'edit.html', {'form': form, 'nombre': nombre})
+    return render(request, 'grupo_edit.html', {'form': form})
 
 def grupo_borrar(request, pk):
     Grupo.objects.get(pk=pk).delete()
         
     return redirect('grupo_list')
-
-def paginacion_no_ajax(request):
-    datos = Musico.objects.all()
-    
-    cabecera = MusicoForm.Meta.fields
-    return render(request, 'paginacion_sin_ajax.html', {'datos': datos, 'cabecera': cabecera})
-
-def paginacion_con_ajax(request):
-    pagina = 1
-    datos = Musico.objects.all()
-    inicio = (pagina - 1) * 5
-    total = len(datos)
-    i = 0
-    datosMostrar = list()
-    while (i < 5 and (inicio + i) < total ):
-        datosMostrar.append(datos[inicio + i])
-        i += 1
-        
-    paginas = list()
-    paginas.append(1)
-    numPaginas = total//5
-    if numPaginas > 2:
-        paginas.append(2)
-    if numPaginas  > 3:
-        paginas.append(3)
-    
-
-        
-    cabecera = MusicoForm.Meta.fields
-    
-    return render(request, 'paginacion_con_ajax.html', {'datos': datosMostrar, 'cabecera': cabecera})
-
-def obtener_pagina(request, pagina):
-    datos = Musico.objects.all()
-    inicio = (pagina - 1) * 5
-    total = len(datos)
-    i = 0
-    datosMostrar = list()
-    while (i < 5 and (inicio + i) < total ):
-        datosMostrar.append(datos[inicio + i])
-        i += 1
-    serializado = serializers.serialize('json', datosMostrar)
-    return JsonResponse({'datos': serializado, 'numElementos': total })
-
-def obtener_total(request):
-    datos = Musico.objects.all()
-    total = len(datos)
-
-    return JsonResponse({'numElementos': total })
-
-def mapa(request):    
-     return render(request, 'mapa.html')

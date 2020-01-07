@@ -23,8 +23,3 @@ class Musico(models.Model):
     grupo = models.ManyToManyField(Grupo)
     edad = models.IntegerField()
 
-
-class Escenario(models.Model):
-    nombre = models.CharField(max_length=200)
-    coordenadaX = models.FloatField()
-    coordenadaY = models.FloatField()

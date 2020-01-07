@@ -1,5 +1,5 @@
 from django import forms
-from .models import Album, Grupo, Musico, Escenario
+from .models import Album, Grupo, Musico
 from django.shortcuts import redirect
 
 class AlbumForm(forms.ModelForm):
@@ -16,7 +16,3 @@ class MusicoForm(forms.ModelForm):
     class Meta:
         model = Musico
         fields = ('nombre', 'fechaNacimiento', 'instrumentoPrincipal', 'grupo', 'edad') 
-class EscenarioForm(forms.ModelForm):
-    class Meta:
-        model = Escenario
-        fields = ('nombre', 'coordenadaX', 'coordenadaX') 

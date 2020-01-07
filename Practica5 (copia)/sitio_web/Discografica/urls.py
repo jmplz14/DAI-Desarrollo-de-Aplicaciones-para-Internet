@@ -24,12 +24,5 @@ urlpatterns = [
   path('musico/list',views.musico_list, name='musico_list'),
   path('musico/<int:pk>/edit/', views.musico_edit, name='musico_edit'),
   path('musico/<int:pk>/borrar/', views.musico_borrar, name='musico_borrar'),
-
-  path('paginacion_no_ajax/', views.paginacion_no_ajax, name='paginacion_no_ajax'),
-  path('paginacion_con_ajax/', views.paginacion_con_ajax, name='paginacion_con_ajax'),
-  path('obtener_pagina/<int:pagina>', views.obtener_pagina, name='obtener_pagina'),
-  path('obtener_total/', views.obtener_total, name='obtener_total'),
-
-  path('mapa/', views.mapa, name='mapa'),
   
 ]

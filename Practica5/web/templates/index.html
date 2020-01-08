@@ -472,20 +472,24 @@
 
                 // Map details
                 L.mapbox.accessToken = 'pk.eyJ1Ijoic3RlbmluamEiLCJhIjoiSjg5eTMtcyJ9.g_O2emQF6X9RV69ibEsaIw';
-                var map = L.mapbox.map('map', 'mapbox.streets').setView([53.4072, -2.9821], 14);
+                var map = L.mapbox.map('map', 'mapbox.streets').setView([41.66, -4.71], 14);
 
 
 
                 var i;
+                console.log(etiquetas)
                 for (i = 0; i < etiquetas.length; i++) {
-                    marker = L.marker([parseInt(etiquetas[i][1]), parseInt(etiquetas[i][2])]);
+                    console.log(parseFloat(etiquetas[i][2]))
+                    x = parseFloat(etiquetas[i][1].replace(",", "."));
+                    y = parseFloat(etiquetas[i][2].replace(",", "."));
+                    marker = L.marker([x,y],{ draggable: 'true' });
                     marker.bindPopup(etiquetas[i][0]);
                     marker.addTo(map);
                 }
 
                 map.on('click', function (e) {
 
-                    marker = L.marker(e.latlng, { draggable: 'true' }).on('click', function (e) {
+                    marker = L.marker(e.latlng).on('click', function (e) {
                         
                         if( botonClicado != "" ) {
                             

@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block main %}
+{% if usuario is defined %}
+    <form action="/cambiados" method="POST">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Usuario</label>
+            <input class="form-control" name="nombre" id="exampleFormControlInput1" placeholder="Usuario"
+                value="{{session['usuario']}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Contraseña</label>
+            <input class="form-control" name="contraseña" id="exampleFormControlInput1" placeholder="Contraseña"
+                type="password">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Nombre completo</label>
+            <input class="form-control" name="nombreCompleto" id="exampleFormControlInput1" placeholder="Nombre completo"
+                value="{{nombreCompleto}}"></input>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn">Guardar Cambios</button>
+    </form>
+    {% if cambiado is defined %}
+        {% if cambiado%}
+            <p class="text-success">Se cambio correctamente los datos</p>
+        {%else%}
+            <p class="text-danger">No se cambio correctamente los datos   </p>
+        {%endif%}
+    {%endif%}
+{%else%}
+    <h1>No esta logueado</h1>
+{%endif%}
+{% endblock %}

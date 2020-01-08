@@ -1,0 +1,78 @@
+{% load static %}
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            
+        <img src="{% static "johnny_automatic_vegetables.svg" %}" height="100" alt="">
+        <div class="mr-auto">
+            <h1 class="text-warning">Discografica Tomate</h1>
+            <p class="text-warning">Tu frutería de barrio y confianza</p>
+        </div>
+        <div>
+            {% if usuario is not defined %}
+            <form action = "/login" method = "POST">
+                <input id="emailInput" placeholder="Usuario" name="usuario" class="form-control form-control-sm" type="text" required="">
+                <input id="passwordInput" placeholder="Password" name="contraseña" class="form-control form-control-sm" type="password" required="">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <form action = "/registro" method = "POST">
+                <button type="submit" class="btn btn-primary btn-block">Registro</button>
+            </form>
+            {%else%}
+            
+            <h3 class="text-warning">Bienvenido {{usuario}}</h3>
+            <form action = "/logout" method = "POST">
+            <button type="submit" class="btn btn-primary btn-block">Logout</button>
+            </form>
+            {%endif%}
+        </div>
+
+    </nav>
+
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="{% url 'album_list' %}" class="nav-link"><span class="glyphicon glyphicon-plus">Albums</span></a>   
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'grupo_list' %}" class="nav-link"><span class="glyphicon glyphicon-plus">Grupos</span></a>   
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'musico_list' %}" class="nav-link"><span class="glyphicon glyphicon-plus">Músicos</span></a>   
+                    </li>
+                    
+                </ul>
+
+
+                
+                
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            
+            {% block main %} {% endblock %}
+            
+
+
+        </main>
+    </div>
+
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+        <div class="container text-center">
+            <small>Copyright &copy; Frutería tomate</small>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

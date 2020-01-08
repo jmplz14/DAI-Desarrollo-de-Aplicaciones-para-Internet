@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    <div class="musico">
+        ('nombre', 'fechaNacimiento', 'instrumentoPrincipal', 'grupo', 'edad') 
+        <p>Nombre : {{ grupo.nombre }}</p>
+        <p>Fecha creación : {{ musico.fechaNacimiento }}</p>
+        <p>Instrumento Principal: {{ musico.instrumentoPrincipal}}</p>
+        <p>Grupo : {{ musico.grupo }}</p>
+        <p>Edad : {{ musico.edad }}</p>
+    </div>
+{% endblock %}

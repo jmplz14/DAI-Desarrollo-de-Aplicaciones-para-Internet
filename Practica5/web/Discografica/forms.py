@@ -15,4 +15,4 @@ class GrupoForm(forms.ModelForm):
 class MusicoForm(forms.ModelForm):
     class Meta:
         model = Musico
-        fields = ('nombre', 'fechaNacimiento', 'instrumentoPrincipal', 'grupo', 'edad') 
+        fields = ('nombre', 'fechaNacimiento', 'instrumentoPrincipal', 'grupo', 'edad', 'coordenadaX', 'coordenadaY') 

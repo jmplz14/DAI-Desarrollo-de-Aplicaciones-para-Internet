@@ -9,6 +9,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }} /static/jquery-3.4.1.min.js">
     </script>
 
+
     <script>
 
         $(document).ready(function () {
@@ -153,7 +154,7 @@
                     }
 
                     for (i = 0; i < 3 && inicio + i <= paginaMax; i++) {
-                        
+
 
                         campos[posPaginador + i].innerHTML = inicio + i;
                         if (inicio + i == pagina) {
@@ -416,11 +417,11 @@
                         var paginas = []
                         paginas.push(1)
 
-                        if (paginaMax >= 2){
+                        if (paginaMax >= 2) {
                             paginas.push(2)
                         }
 
-                        if (paginaMax >= 3){
+                        if (paginaMax >= 3) {
                             paginas.push(3)
                         }
                         var campos = tablaPaginar.getElementsByTagName("td")
@@ -434,8 +435,8 @@
                         siguiente.onclick = function () { generarSiguienteAjax(); }
                         atras.onclick = function () { generarAnteriorAjax(); }
                         final.onclick = function () { generarUltimoAjax(); }
-                        generarListaAjax(1) 
-                        
+                        generarListaAjax(1)
+
 
                     },
                     failure: function (data) {
@@ -458,6 +459,60 @@
 
             iniciarPaginador();
             iniciarPaginadorAjax();
+            if ($('#map').length) {
+                var botonClicado = "";
+                var etiquetas = []
+                {% for image in datos %}
+                datos = ['{{ image.nombre }}', '{{ image.coordenadaX }}', '{{ image.coordenadaY }}']
+
+                etiquetas.push(datos);
+                {% endfor %}
+
+
+
+                // Map details
+                L.mapbox.accessToken = 'pk.eyJ1Ijoic3RlbmluamEiLCJhIjoiSjg5eTMtcyJ9.g_O2emQF6X9RV69ibEsaIw';
+                var map = L.mapbox.map('map', 'mapbox.streets').setView([53.4072, -2.9821], 14);
+
+
+
+                var i;
+                for (i = 0; i < etiquetas.length; i++) {
+                    marker = L.marker([parseInt(etiquetas[i][1]), parseInt(etiquetas[i][2])]);
+                    marker.bindPopup(etiquetas[i][0]);
+                    marker.addTo(map);
+                }
+
+                map.on('click', function (e) {
+
+                    marker = L.marker(e.latlng, { draggable: 'true' }).on('click', function (e) {
+                        
+                        if( botonClicado != "" ) {
+                            
+                            botonClicado.setOpacity(1)
+                        }
+                        
+                        this.setOpacity(0.65);
+                        
+                        
+                        botonClicado = this
+                        
+                    });
+                    marker.addTo(map);
+                    var draggable = new L.Draggable(marker);
+                    draggable.enable();
+                });
+
+                $("#borrarMark").click(function () { map.removeLayer(botonClicado);
+                botonClicado = "" });
+
+
+
+
+
+            }
+
+
 
 
 
@@ -532,7 +587,14 @@
                         <a href="{% url 'paginacion_con_ajax' %}" class="nav-link"><span
                                 class="glyphicon glyphicon-plus">Paginación con AJAX</span></a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="{% url 'mapa' %}" class="nav-link"><span
+                                class="glyphicon glyphicon-plus">Mapa</span></a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="{% url 'grafica' %}" class="nav-link"><span
+                                    class="glyphicon glyphicon-plus">Graficas</span></a>
+                    </li>
                 </ul>
 
 

@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.core import serializers
+import json
 
 
 # Create your views here.
@@ -191,3 +192,39 @@ def obtener_total(request):
 
     return JsonResponse({'numElementos': total })
 
+def mapa(request):
+
+    datos = Musico.objects.all()
+    datos_musicos = list()
+    for i in datos:
+        valores = [i.nombre, i.coordenadaX, i.coordenadaY]
+        datos_musicos.append(valores)
+
+
+    return render(request, 'mapa.html', {'datos': datos})
+
+def grafica(request):
+    porcentajes = list()
+    valores = list()
+    total = 0
+
+    musicos = Musico.objects.all()
+
+    total += len(musicos) 
+
+    grupos = Grupo.objects.all()
+    
+    total += len(grupos) 
+
+    album = Album.objects.all()
+
+    total += len(album)
+    
+    valores.append(len(musicos))
+    valores.append(len(grupos))
+    valores.append(len(album))
+    porcentajes.append((len(musicos)/total)*100)
+    porcentajes.append((len(grupos)/total)*100)
+    porcentajes.append((len(album)/total)*100)
+
+    return render(request, 'grafica.html',{'datos': porcentajes, 'valores': valores})

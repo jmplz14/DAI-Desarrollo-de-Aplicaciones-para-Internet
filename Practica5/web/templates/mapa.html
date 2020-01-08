@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block main %}
+
+<!--D3 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js'></script>
+<!--Leaflet / Mapbox -->
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+
+
+<!--Div to hold the map. Inline styling is horrible I know, it's just for demo purpose... -->
+<div class="btn-group" role="group" aria-label="Basic example">
+        <form method="POST">
+            <button id="borrarMark" type="button" class="btn btn-primary btn-md center-block" onclick="" >Borrar</button>
+        </form>
+    
+    </div>   
+<div id="map"></div>
+{% endblock %}

@@ -29,5 +29,8 @@ urlpatterns = [
   path('paginacion_con_ajax/', views.paginacion_con_ajax, name='paginacion_con_ajax'),
   path('obtener_pagina/<int:pagina>', views.obtener_pagina, name='obtener_pagina'),
   path('obtener_total/', views.obtener_total, name='obtener_total'),
+
+  path('mapa/', views.mapa, name='mapa'),
+  path('grafica/', views.grafica, name='grafica'),
   
 ]

@@ -6,7 +6,11 @@ services:
       build: web
       ports:
          - 5000:5000
-      command: python manage.py runserver 0.0.0.0:5000 # servidor de desarrollo
+      command: 
+
+
+         python manage.py runserver 0.0.0.0:5000
+      
       volumes:
          - ./web:/web
 

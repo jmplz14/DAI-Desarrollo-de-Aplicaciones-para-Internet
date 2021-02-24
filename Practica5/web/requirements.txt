@@ -1,5 +1,10 @@
-Django>=2.2,<3.0
+Django
 django-allauth
 djangorestframework
 django-bootstrap4
 django-crispy-forms
+Django
+psycopg2
+dj_database_url
+gunicorn
+django-heroku
